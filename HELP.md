@@ -1,4 +1,4 @@
-#**API_2 Service**
+#**Temperature Request Service**
 ###Purpose - returning temperature of city,and return all requests that was done during period of time. 
 ***
 _Details - Using name of city that was passed as the parameter returning current temperature on this city if it is storing in API_1 database. 
