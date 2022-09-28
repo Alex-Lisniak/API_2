@@ -41,6 +41,9 @@ public class MainServiceImpl implements MainService{
     private final String API_1_URI = "http://localhost:8090/city/";
     private final TemperatureRequestRepository temperatureRequestRepository;
 
+
+    // todo - provide opportunity to send different types of temp(Fahrenheit,celsius, Kalvin etc)
+    // todo - divide getting request to API_1 into another method
     @Override
     public String getTemperature(String cityName) throws URISyntaxException, ExecutionException, InterruptedException, IOException {
         HttpClient client = HttpClient.newBuilder()
@@ -56,6 +59,8 @@ public class MainServiceImpl implements MainService{
         String stringKeyResponse =  client.sendAsync(getKeyRequest, BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .get();
+
+        // todo - use trim() to delete quotation marks?
         UUID uuidKeyResponse = UUID.fromString(
                 stringKeyResponse.substring(1, stringKeyResponse.length() - 1));
 
@@ -88,6 +93,7 @@ public class MainServiceImpl implements MainService{
     }
 
     private String getStringResponseFromWeatherApi(String cityName) throws IOException, InterruptedException {
+        // todo - weather URI should be in application.properties
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://visual-crossing-weather.p.rapidapi.com/forecast?aggregateHours=24&location="+ cityName + "&contentType=csv&unitGroup=us&shortColumnNames=true"))
                 .header(weatherServiceHeaderKeyName, weatherServiceHeaderKeyValue)
@@ -99,6 +105,7 @@ public class MainServiceImpl implements MainService{
         return  httpResponse.body();
     }
 
+    // todo - optimize regex or provide CSVReader
     private Double getCurrentTemperatureFromResponse(String response){
         int indexOfTemp = response.indexOf("temp");
 
@@ -115,4 +122,3 @@ public class MainServiceImpl implements MainService{
     }
 
 }
-// todo - optimize regex or provide CSVReader

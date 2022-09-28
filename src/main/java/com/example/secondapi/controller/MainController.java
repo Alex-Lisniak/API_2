@@ -23,6 +23,7 @@ public class MainController {
 
     private final TemperatureRequestService temperatureRequestService;
 
+    // todo - provide opportunity to select type of temp(Fahrenheit,celsius, Kalvin etc)
     @GetMapping("/city/getTemperature/{cityName}")
     public String getTemperature(@PathVariable String cityName){
 

@@ -18,6 +18,7 @@ public class TemperatureRequestServiceImpl implements TemperatureRequestService 
 
     private final TemperatureRequestMapper temperatureRequestMapper;
 
+    // todo - provide opportunity to take parameters normal date format - ""yy//mm//dd" and convert in internally
     @Override
     public List<TemperatureRequestDto> getAllRequestsInPeriod(Long lowBound, Long highBound) {
         List <TemperatureRequest> temperatureRequests = temperatureRequestRepository.findAll();

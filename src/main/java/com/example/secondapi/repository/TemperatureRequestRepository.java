@@ -19,9 +19,6 @@ public class TemperatureRequestRepository {
         dynamoDBMapper.save(temperatureRequest);
         return temperatureRequest;
     }
-    public TemperatureRequest findById(String id){
-        return dynamoDBMapper.load(TemperatureRequest.class, id);
-    }
 
     public List<TemperatureRequest> findAll(){
         return dynamoDBMapper.scan(TemperatureRequest.class, new DynamoDBScanExpression());
